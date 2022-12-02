@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD APP</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" 
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body style="background-color:blanchedalmond ;">
+
+    <h1 class="container mt-5 col-lg-7">TO-DO-LIST</h1>
+    <div class="container mt-5 col-lg-7">
+        <div class="input-group mb-3">
+            <input id="input" type="text" class="form-control" placeholder="Add task" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <div class="input-group-append">
+              <button id="Btn" class="btn btn-success" type="button" id="button-addon2">Add</button>
+            </div>
+        </div>
+        <ul id="parentList" class="list-group">
+        </ul>
+    </div>
+
+    <script>
+        let addBtn = document.getElementById("Btn");
+        addBtn.addEventListener('click',addChap);
+        let parentList = document.getElementById('parentList');
+        let  emptyMsg = document.createElement('h3')
+        if(parentList.children.length==0){
+               emptyMsg.textContent = "No tasks in this category.Click Add to create your task."
+               parentList.appendChild(emptyMsg);
+            }
+        // function to add chapters...
+        function addChap(e){
+            // taking value of input in variable;
+            if(parentList.children[0]==emptyMsg){
+                parentList.children[0].remove();
+            }
+            let currentInput = document.getElementById('input');
+            // creating list..
+            let newLi = document.createElement('li');
+            newLi.className ="list-group-item d-flex justify-content-between"  // note this in notebook...
+            newLi.textContent = currentInput.value;
+            newLi.innerHTML = `<h3 class="flex-grow-1">${currentInput.value}</h3> 
+                    <button class="btn btn-warning mx-4"onclick="editChapter(this)">Edit</button>
+                    <button id="remove" class="btn btn-danger" onclick="deleteChapter(this)">Remove</button>`
+            //Now appending in ul list..
+            parentList.appendChild(newLi);
+        }
+        let remove = document.getElementById('remove');
+        function deleteChapter(currentElement){
+            currentElement.parentElement.remove();
+            if(parentList.children.length<=0){
+               emptyMsg.textContent = "No tasks in this category.Click Add to create your task."
+               parentList.appendChild(emptyMsg);
+            }
+        }
+        function editChapter(currElement){
+            if(currElement.textContent=="Done"){
+                currElement.textContent="Edit"
+                let chapName = currElement.previousElementSibling.value
+                newInput = document.createElement('h3');
+                newInput.className = "flex-grow-1"
+                newInput.textContent = chapName 
+                currElement.parentElement.replaceChild(newInput,currElement.previousElementSibling)
+            }
+            else{
+                currElement.textContent="Done"
+                let chapName = currElement.previousElementSibling
+                newInput = document.createElement('input');
+                newInput.className ="form-control"
+                newInput.type = "text"
+                newInput.placeholder="Add task"
+                currElement.parentElement.replaceChild(newInput,chapName)
+            }
+        }
+    </script>
+    
+</body>
+</html>
