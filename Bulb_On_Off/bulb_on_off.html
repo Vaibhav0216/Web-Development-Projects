@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Switch Button</title>
+    <style>
+        .center {
+                 display: block;
+                 margin-left: auto;
+                 margin-right: auto;
+                 width: 40%;
+                }
+        .btn{
+            padding-block: 10px;
+            margin-block: 20px;
+            background-color: green;
+        }
+    </style>
+</head>
+<body style="background-color: black;">
+    <img id="bulb" class="center" src="Bulb_Off.jpg" alt="">
+    <button id="btn" class="center btn">Turn On</button>
+
+    <script>
+        let btn = document.getElementById('btn');
+        let bulb = document.getElementById('bulb')
+        btn.addEventListener('click',myfunction);
+        function myfunction(e){
+            if(btn.textContent.includes("Turn On")){
+                bulb.src="Bulb_On.jpg";
+                btn.textContent="Turn Off";
+            }
+            else{
+                bulb.src="Bulb_Off.jpg";
+                btn.textContent="Turn On";
+            }  
+        }
+    </script>
+</body>
+</html>
