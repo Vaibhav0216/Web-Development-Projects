@@ -1,3 +1,4 @@
+// ...................................UPDATE CODE DOUBLE CLICK PROBLEM ........................
 import React from "react";
 import Header from "./Header";
 import CreateNote from "./CreatNote";
